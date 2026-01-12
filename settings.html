@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="title.settings">Settings</title>
+  <link rel="icon" type="image/png" href="favicons/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app settings-page">
+    <header class="settings-header">
+      <div>
+        <h1 data-i18n="title.settings">Settings</h1>
+      </div>
+      <nav class="page-nav">
+        <a
+          class="nav-link"
+          href="./index.html"
+          data-i18n="link.tasks"
+          data-i18n-title="link.tasksTitle"
+          title="Back to tasks"
+        >
+          Tasks
+        </a>
+      </nav>
+    </header>
+
+    <main class="settings-content">
+      <section class="settings-card">
+        <div class="settings-row">
+          <div class="setting-label">
+            <h3 data-i18n="section.darkMode.title">Dark mode</h3>
+            <p class="hint" data-i18n="section.darkMode.hint">
+              Use a darker color palette.
+            </p>
+          </div>
+          <label
+            class="settings-toggle"
+            aria-label="Toggle dark mode"
+            data-i18n-aria-label="section.darkMode.toggle"
+          >
+            <input
+              type="checkbox"
+              id="darkModeToggle"
+              class="settings-toggle-input"
+              title="Toggle dark mode"
+              data-i18n-title="section.darkMode.toggle"
+            />
+            <span class="switch">
+              <span class="switch-handle"></span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="settings-row">
+          <div class="setting-label">
+            <h3 data-i18n="section.partyMode.title">Party mode 🎉</h3>
+            <p class="hint" data-i18n="section.partyMode.hint">
+              Sprinkle confetti whenever you complete a task.
+            </p>
+          </div>
+          <label
+            class="settings-toggle"
+            aria-label="Toggle party mode"
+            data-i18n-aria-label="section.partyMode.toggle"
+          >
+            <input
+              type="checkbox"
+              id="partyModeToggle"
+              class="settings-toggle-input"
+              title="Toggle party mode"
+              data-i18n-title="section.partyMode.toggle"
+            />
+            <span class="switch">
+              <span class="switch-handle"></span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="settings-row">
+          <div class="setting-label">
+            <h3 data-i18n="section.backup.title">Export/Import tasks</h3>
+            <p class="hint" data-i18n="section.backup.hint">
+              Backup your tasks or load them from a JSON file.
+            </p>
+          </div>
+          <div class="settings-actions">
+            <button
+              id="importTasksBtn"
+              type="button"
+              title="Import tasks from a JSON file"
+              data-i18n="button.import"
+              data-i18n-title="title.importButton"
+            >
+              Import
+            </button>
+            <button
+              id="exportTasksBtn"
+              type="button"
+              title="Export all tasks to a JSON file"
+              data-i18n="button.export"
+              data-i18n-title="title.exportButton"
+            >
+              Export
+            </button>
+            <input
+              id="importTasksInput"
+              class="visually-hidden"
+              type="file"
+              accept="application/json"
+              aria-label="Choose a tasks JSON file to import"
+              data-i18n-aria-label="aria.importInput"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="settings-row">
+          <div class="setting-label">
+            <h3 data-i18n="section.language.title">Language</h3>
+            <p class="hint" data-i18n="section.language.hint">
+              Choose the interface language.
+            </p>
+          </div>
+          <div class="settings-actions">
+            <label
+              class="visually-hidden"
+              for="languageSelect"
+              data-i18n="label.languageSelect"
+            >
+              Language
+            </label>
+            <select
+              id="languageSelect"
+              class="settings-select"
+              title="Select the language for the app"
+              data-i18n-title="title.languageSelect"
+            >
+              <option value="en" data-i18n="option.language.en">English</option>
+              <option value="fr" data-i18n="option.language.fr">French</option>
+              <option value="es" data-i18n="option.language.es">Spanish</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="settings-row reset-row">
+          <div class="setting-label">
+            <h3 data-i18n="section.reset.title">Reset tasks</h3>
+            <p class="hint" data-i18n="section.reset.hint">
+              Delete all tasks permanently.
+            </p>
+          </div>
+          <button
+            id="resetTasksBtn"
+            class="danger"
+            type="button"
+            title="Delete all tasks"
+            data-i18n="button.reset"
+            data-i18n-title="title.resetButton"
+          >
+            Reset
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script defer src="translations.js"></script>
+  <script defer src="settings.js"></script>
+</body>
+</html>
