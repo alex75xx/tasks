@@ -9,7 +9,7 @@
   ];
 
   let confettiContainer = null;
-  const audio = new Audio("additional-settings/yahoo.m4a");
+  const audio = new Audio("additional-settings/party-mode/yahoo.m4a");
 
   const ensureConfettiContainer = () => {
     if (confettiContainer) return confettiContainer;

@@ -84,9 +84,36 @@
       <section class="settings-card">
         <div class="settings-row">
           <div class="setting-label">
-            <h3 data-i18n="section.backup.title">Export/Import tasks</h3>
+            <h3 data-i18n="section.notes.title">Notes</h3>
+            <p class="hint" data-i18n="section.notes.hint">
+              Toggle the sticky Notes pad on the tasks page.
+            </p>
+          </div>
+          <label
+            class="settings-toggle"
+            aria-label="Toggle notes pad"
+            data-i18n-aria-label="section.notes.toggle"
+          >
+            <input
+              type="checkbox"
+              id="notesToggle"
+              class="settings-toggle-input"
+              title="Toggle notes pad"
+              data-i18n-title="section.notes.toggle"
+            />
+            <span class="switch">
+              <span class="switch-handle"></span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <div class="settings-row">
+          <div class="setting-label">
+            <h3 data-i18n="section.backup.title">Export/Import tasks & notes</h3>
             <p class="hint" data-i18n="section.backup.hint">
-              Backup your tasks or load them from a JSON file.
+              Backup your tasks and notes or load them from a JSON file.
             </p>
           </div>
           <div class="settings-actions">
@@ -173,6 +200,7 @@
     </main>
   </div>
   <script defer src="translations.js"></script>
+  <script defer src="additional-settings/notes/notes.js"></script>
   <script defer src="settings.js"></script>
 </body>
 </html>

@@ -6,101 +6,132 @@
 <title data-i18n="title.tasks">Tasks</title>
   <link rel="icon" type="image/png" href="favicons/favicon.png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="additional-settings/notes/notes.css">
 </head>
 <body>
-  <div class="app">
-    <header class="app-header">
-      <div class="title-block">
-        <h1 data-i18n="title.tasks">Tasks</h1>
-        <a
-          class="settings-link"
-          href="settings.html"
-          data-i18n="link.settings"
-          data-i18n-title="link.settingsTitle"
-          title="Open settings"
-        >
-          Settings
-        </a>
-      </div>
-      <form id="taskForm" class="task-form header-form" autocomplete="off">
-        <label
-          class="visually-hidden"
-          for="taskName"
-          data-i18n="label.taskName"
-        >
-          Task name
-        </label>
-        <input
-          id="taskName"
-          name="taskName"
-          type="text"
-          placeholder="New task, press 'Enter' to add +"
-          required
-          title="Enter the name of the task and press 'Enter' to create it"
-          data-i18n-placeholder="placeholder.taskName"
-          data-i18n-title="title.taskNameInput"
-        />
-      </form>
-    </header>
-
-    <main>
-      <section class="list-wrapper">
-        <div class="list-header">
-          <div class="list-header-actions">
-            <div class="search-compact">
-              <label
-                class="visually-hidden"
-                for="searchInput"
-                data-i18n="label.search"
-              >
-                Search tasks
-              </label>
-              <div class="search-input-wrapper">
-                <input
-                  id="searchInput"
-                  type="search"
-                  placeholder="Search tasks..."
-                  title="Search tasks by name and press 'Enter' to filter"
-                  data-i18n-placeholder="placeholder.search"
-                  data-i18n-title="title.searchInput"
-                />
-                <button
-                  id="clearSearchBtn"
-                  class="clear-search-btn"
-                  type="button"
-                  aria-label="Clear search"
-                  title="Clear search"
-                  data-i18n-aria-label="aria.clearSearch"
-                  data-i18n-title="title.clearSearch"
-                  style="display: none;"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-            <span class="stat completed" id="completedTasks">0 completed</span>
-          </div>
+  <div class="layout" id="layoutRoot">
+    <div class="app">
+      <header class="app-header">
+        <div class="title-block">
+          <h1 data-i18n="title.tasks">Tasks</h1>
+          <a
+            class="settings-link"
+            href="settings.html"
+            data-i18n="link.settings"
+            data-i18n-title="link.settingsTitle"
+            title="Open settings"
+          >
+            Settings
+          </a>
         </div>
-        <ul
-          id="taskList"
-          class="task-list"
-          aria-label="Tasks"
-          aria-live="polite"
-          data-i18n-aria-label="aria.taskList"
-        ></ul>
-        <p
-          id="emptyState"
-          class="empty-state"
-          data-i18n="empty.default"
+        <form id="taskForm" class="task-form header-form" autocomplete="off">
+          <label
+            class="visually-hidden"
+            for="taskName"
+            data-i18n="label.taskName"
+          >
+            Task name
+          </label>
+          <input
+            id="taskName"
+            name="taskName"
+            type="text"
+            placeholder="New task, press 'Enter' to add +"
+            required
+            title="Enter the name of the task and press 'Enter' to create it"
+            data-i18n-placeholder="placeholder.taskName"
+            data-i18n-title="title.taskNameInput"
+          />
+        </form>
+      </header>
+
+      <main>
+        <section class="list-wrapper">
+          <div class="list-header">
+            <div class="list-header-actions">
+              <div class="search-compact">
+                <label
+                  class="visually-hidden"
+                  for="searchInput"
+                  data-i18n="label.search"
+                >
+                  Search tasks
+                </label>
+                <div class="search-input-wrapper">
+                  <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Search tasks..."
+                    title="Search tasks by name and press 'Enter' to filter"
+                    data-i18n-placeholder="placeholder.search"
+                    data-i18n-title="title.searchInput"
+                  />
+                  <button
+                    id="clearSearchBtn"
+                    class="clear-search-btn"
+                    type="button"
+                    aria-label="Clear search"
+                    title="Clear search"
+                    data-i18n-aria-label="aria.clearSearch"
+                    data-i18n-title="title.clearSearch"
+                    style="display: none;"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+              <span class="stat completed" id="completedTasks">0 completed</span>
+            </div>
+          </div>
+          <ul
+            id="taskList"
+            class="task-list"
+            aria-label="Tasks"
+            aria-live="polite"
+            data-i18n-aria-label="aria.taskList"
+          ></ul>
+          <p
+            id="emptyState"
+            class="empty-state"
+            data-i18n="empty.default"
+          >
+            No tasks yet. Add one to get started.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <aside class="comment-pad" aria-label="Comments scratchpad">
+      <div class="comment-pad__header">
+        <span
+          class="comment-pad__title"
+          data-i18n="notes.title"
         >
-          No tasks yet. Add one to get started.
-        </p>
-      </section>
-    </main>
+          Notes
+        </span>
+      </div>
+      <label
+        class="visually-hidden"
+        for="commentPad"
+        data-i18n="notes.label"
+      >
+        Notes
+      </label>
+      <textarea
+        id="commentPad"
+        name="commentPad"
+        placeholder="Write comments or notes here..."
+        title="Write comments or notes here"
+        data-i18n-placeholder="notes.placeholder"
+        data-i18n-title="notes.titleAttr"
+        spellcheck="true"
+      ></textarea>
+    </aside>
   </div>
 
   <script src="translations.js" defer></script>
-  <script src="additional-settings/confetti.js" defer></script>
+  <script src="additional-settings/notes/notes.js" defer></script>
+  <script src="additional-settings/party-mode/confetti.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>

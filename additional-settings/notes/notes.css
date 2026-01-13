@@ -1,0 +1,57 @@
+.layout.no-notes {
+  display: block;
+  padding: 0 16px;
+}
+
+.layout.no-notes .app {
+  margin: 0 auto;
+}
+
+.comment-pad {
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  width: 420px;
+  max-height: calc(100vh - 40px);
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 5;
+}
+
+.comment-pad textarea {
+  min-height: 340px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.comment-pad__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.comment-pad__title {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.comment-pad__hint {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+  .comment-pad {
+    position: static;
+    width: 100%;
+    max-width: none;
+  }
+}
+
