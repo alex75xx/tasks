@@ -5,6 +5,7 @@
   const defaultSettings = {
     darkMode: false,
     partyMode: false,
+    notesEnabled: true,
     language: "en",
   };
 
@@ -13,8 +14,9 @@
       "title.settings": "Settings",
       "section.darkMode.toggle": "Toggle dark mode",
       "section.partyMode.toggle": "Toggle party mode",
-      "section.backup.title": "Export/Import tasks",
-      "section.backup.hint": "Backup your tasks or load them from a JSON file.",
+      "section.backup.title": "Export/Import tasks & notes",
+      "section.backup.hint":
+        "Backup your tasks and notes or load them from a JSON file.",
       "button.import": "Import",
       "button.export": "Export",
       "title.importButton": "Import tasks from a JSON file",
@@ -31,15 +33,22 @@
       "option.language.en": "English",
       "option.language.fr": "French",
       "option.language.es": "Spanish",
+      "section.notes.title": "Notes",
+      "section.notes.hint":
+        "Toggle the sticky Notes pad on the tasks page. Notes are saved in local storage and included in exports/imports.",
+      "section.notes.toggle": "Toggle notes pad",
       "alert.importAdded_one":
         "{count} task imported and added. Opening your tasks.",
       "alert.importAdded_other":
         "{count} tasks imported and added. Opening your tasks.",
       "alert.importNone":
         "No new tasks found in the file. Existing tasks left unchanged.",
+      "alert.importNotesOnly": "Notes imported. Opening your tasks.",
       "alert.importError":
         "Could not import tasks. Please choose a valid JSON file.",
       "alert.resetConfirm": "This will delete all tasks permanently. Continue?",
+      "alert.notesDisableConfirm":
+        "Disabling notes will delete all saved notes. Continue?",
       "task.untitled": "Untitled",
     };
 
@@ -76,10 +85,13 @@
   const resetBtn = document.getElementById("resetTasksBtn");
   const darkModeToggle = document.getElementById("darkModeToggle");
   const partyToggle = document.getElementById("partyModeToggle");
+  const notesToggle = document.getElementById("notesToggle");
   const exportBtn = document.getElementById("exportTasksBtn");
   const importBtn = document.getElementById("importTasksBtn");
   const importInput = document.getElementById("importTasksInput");
   const languageSelect = document.getElementById("languageSelect");
+  const notesFeature =
+    window.TasksNotes || { loadNotes: () => "", saveNotes: () => {}, clearNotes: () => {} };
 
   const loadTasks = () => {
     try {
@@ -89,6 +101,35 @@
       return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
+    }
+  };
+
+  const getNotes = () =>
+    (notesFeature.loadNotes && typeof notesFeature.loadNotes === "function"
+      ? notesFeature.loadNotes()
+      : "") || "";
+
+  const saveNotes = (value) => {
+    if (notesFeature.saveNotes && typeof notesFeature.saveNotes === "function") {
+      notesFeature.saveNotes(value);
+      return;
+    }
+    try {
+      localStorage.setItem("tasks_comments", value ?? "");
+    } catch (err) {
+      console.warn("Failed to save notes", err);
+    }
+  };
+
+  const clearNotes = () => {
+    if (notesFeature.clearNotes && typeof notesFeature.clearNotes === "function") {
+      notesFeature.clearNotes();
+      return;
+    }
+    try {
+      localStorage.removeItem("tasks_comments");
+    } catch (err) {
+      console.warn("Failed to clear notes", err);
     }
   };
 
@@ -244,16 +285,20 @@
   const updateExportAvailability = () => {
     if (!exportBtn) return;
     const tasks = loadTasks();
-    exportBtn.disabled = tasks.length === 0;
+    const hasNotes = getNotes().trim().length > 0;
+    exportBtn.disabled = tasks.length === 0 && !hasNotes;
   };
 
   const exportTasks = () => {
     const tasks = loadTasks();
-    if (!tasks.length) {
+    const notes = getNotes();
+    const hasNotes = notes.trim().length > 0;
+    if (!tasks.length && !hasNotes) {
       updateExportAvailability();
       return;
     }
-    const blob = new Blob([JSON.stringify(tasks, null, 2)], {
+    const payload = { tasks, notes };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
     });
     const date = new Date().toISOString().split("T")[0];
@@ -272,16 +317,38 @@
       const text = await file.text();
       const parsed = JSON.parse(text);
       const existing = loadTasks();
-      const normalized = normalizeTasks(parsed);
+      let incomingTasks = [];
+      let incomingNotes;
+
+      if (Array.isArray(parsed)) {
+        incomingTasks = parsed;
+      } else if (parsed && typeof parsed === "object") {
+        if (Array.isArray(parsed.tasks)) {
+          incomingTasks = parsed.tasks;
+        }
+        if (
+          Object.prototype.hasOwnProperty.call(parsed, "notes") &&
+          typeof parsed.notes === "string"
+        ) {
+          incomingNotes = parsed.notes;
+        }
+      }
+
+      const normalized = normalizeTasks(incomingTasks);
       const merged = mergeTasks(existing, normalized);
       saveTasks(merged);
+      if (incomingNotes !== undefined) {
+        saveNotes(incomingNotes);
+      }
       updateExportAvailability();
       const addedCount = merged.length - existing.length;
-      window.alert(
-        addedCount
+      const message =
+        addedCount > 0
           ? translateChoice("alert.importAdded", addedCount)
-          : translate("alert.importNone")
-      );
+          : incomingNotes !== undefined
+            ? translate("alert.importNotesOnly")
+            : translate("alert.importNone");
+      window.alert(message);
       window.location.href = "./index.html";
     } catch (err) {
       console.error("Failed to import tasks", err);
@@ -314,6 +381,27 @@
     partyToggle.checked = Boolean(settings.partyMode);
     partyToggle.addEventListener("change", () => {
       settings.partyMode = partyToggle.checked;
+      saveSettings(settings);
+    });
+  }
+
+  if (notesToggle) {
+    notesToggle.checked = Boolean(settings.notesEnabled);
+    notesToggle.addEventListener("change", () => {
+      if (!notesToggle.checked) {
+        const confirmed = window.confirm(translate("alert.notesDisableConfirm"));
+        if (!confirmed) {
+          notesToggle.checked = true;
+          return;
+        }
+        try {
+          clearNotes();
+        } catch (err) {
+          console.warn("Failed to clear notes", err);
+        }
+        updateExportAvailability();
+      }
+      settings.notesEnabled = notesToggle.checked;
       saveSettings(settings);
     });
   }

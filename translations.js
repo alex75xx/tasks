@@ -37,12 +37,21 @@
       "section.partyMode.title": "Party mode 🎉",
       "section.partyMode.hint": "Sprinkle confetti whenever you complete a task.",
       "section.partyMode.toggle": "Toggle party mode",
-      "section.backup.title": "Export/Import tasks",
-      "section.backup.hint": "Backup your tasks or load them from a JSON file.",
+      "section.notes.title": "Notes",
+      "section.notes.hint":
+        "Toggle the sticky Notes pad on the tasks page.",
+      "section.notes.toggle": "Toggle notes pad",
+      "notes.title": "Notes",
+      "notes.label": "Notes",
+      "notes.placeholder": "Write comments or notes here...",
+      "notes.titleAttr": "Write comments or notes here",
+      "section.backup.title": "Export/Import",
+      "section.backup.hint":
+        "Backup your tasks and notes or load them from a JSON file.",
       "button.import": "Import",
       "button.export": "Export",
-      "title.importButton": "Import tasks from a JSON file",
-      "title.exportButton": "Export all tasks to a JSON file",
+      "title.importButton": "Import tasks and notes from a JSON file",
+      "title.exportButton": "Export all tasks and notes to a JSON file",
       "aria.importInput": "Choose a tasks JSON file to import",
       "section.reset.title": "Reset tasks",
       "section.reset.hint": "Delete all tasks permanently.",
@@ -61,9 +70,12 @@
         "{count} tasks imported and added. Opening your tasks.",
       "alert.importNone":
         "No new tasks found in the file. Existing tasks left unchanged.",
+      "alert.importNotesOnly": "Notes imported. Opening your tasks.",
       "alert.importError":
         "Could not import tasks. Please choose a valid JSON file.",
       "alert.resetConfirm": "This will delete all tasks permanently. Continue?",
+      "alert.notesDisableConfirm":
+        "Disabling notes will delete all saved notes. Continue?",
     },
     fr: {
       "title.tasks": "Tâches",
@@ -104,13 +116,21 @@
       "section.partyMode.hint":
         "Lancer des confettis quand vous terminez une tâche.",
       "section.partyMode.toggle": "Activer/désactiver le mode fête",
+      "section.notes.title": "Notes",
+      "section.notes.hint":
+        "Afficher ou masquer le bloc Notes.",
+      "section.notes.toggle": "Activer/désactiver le bloc Notes",
+      "notes.title": "Notes",
+      "notes.label": "Notes",
+      "notes.placeholder": "Écrivez vos commentaires ou notes ici...",
+      "notes.titleAttr": "Écrivez vos commentaires ou notes ici",
       "section.backup.title": "Exporter/Importer",
       "section.backup.hint":
-        "Sauvegardez vos tâches ou chargez-les depuis un fichier JSON.",
+        "Sauvegardez vos tâches et notes ou chargez-les depuis un fichier JSON.",
       "button.import": "Importer",
       "button.export": "Exporter",
-      "title.importButton": "Importer des tâches depuis un fichier JSON",
-      "title.exportButton": "Exporter toutes les tâches dans un fichier JSON",
+      "title.importButton": "Importer des tâches et notesdepuis un fichier JSON",
+      "title.exportButton": "Exporter toutes les tâches et notes dans un fichier JSON",
       "aria.importInput": "Choisissez un fichier JSON de tâches à importer",
       "section.reset.title": "Réinitialiser",
       "section.reset.hint": "Supprimer définitivement toutes les tâches.",
@@ -129,10 +149,13 @@
         "{count} tâches importées et ajoutées. Ouverture de vos tâches.",
       "alert.importNone":
         "Aucune nouvelle tâche trouvée dans le fichier. Tâches existantes inchangées.",
+      "alert.importNotesOnly": "Notes importées. Ouverture de vos tâches.",
       "alert.importError":
         "Impossible d'importer les tâches. Veuillez choisir un fichier JSON valide.",
       "alert.resetConfirm":
         "Cela supprimera toutes les tâches définitivement. Continuer ?",
+      "alert.notesDisableConfirm":
+        "Désactiver les notes supprimera toutes les notes enregistrées. Continuer ?",
     },
     es: {
       "title.tasks": "Tareas",
@@ -172,13 +195,21 @@
       "section.partyMode.hint":
         "Lanza confeti cuando completes una tarea.",
       "section.partyMode.toggle": "Activar/desactivar modo fiesta",
+      "section.notes.title": "Notas",
+      "section.notes.hint":
+        "Mostrar u ocultar el bloc de notas fijo.",
+      "section.notes.toggle": "Activar/desactivar bloc de notas",
+      "notes.title": "Notas",
+      "notes.label": "Notas",
+      "notes.placeholder": "Escribe comentarios o notas aquí...",
+      "notes.titleAttr": "Escribe comentarios o notas aquí",
       "section.backup.title": "Exportar/Importar",
       "section.backup.hint":
-        "Haz una copia de tus tareas o cárgalas desde un archivo JSON.",
+        "Haz una copia de tus tareas y notas o cárgalas desde un archivo JSON.",
       "button.import": "Importar",
       "button.export": "Exportar",
-      "title.importButton": "Importar tareas desde un archivo JSON",
-      "title.exportButton": "Exportar todas las tareas a un archivo JSON",
+      "title.importButton": "Importar tareas y notas desde un archivo JSON",
+      "title.exportButton": "Exportar todas las tareas y notas a un archivo JSON",
       "aria.importInput": "Elige un archivo JSON de tareas para importar",
       "section.reset.title": "Restablecer",
       "section.reset.hint": "Eliminar todas las tareas de forma permanente.",
@@ -197,10 +228,13 @@
         "{count} tareas importadas y añadidas. Abriendo tus tareas.",
       "alert.importNone":
         "No se encontraron tareas nuevas en el archivo. Las tareas existentes no cambiaron.",
+      "alert.importNotesOnly": "Notas importadas. Abriendo tus tareas.",
       "alert.importError":
         "No se pudieron importar las tareas. Elige un archivo JSON válido.",
       "alert.resetConfirm":
         "Esto eliminará todas las tareas de forma permanente. ¿Continuar?",
+      "alert.notesDisableConfirm":
+        "Desactivar las notas eliminará todas las notas guardadas. ¿Continuar?",
     },
   };
 

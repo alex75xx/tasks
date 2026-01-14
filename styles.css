@@ -55,10 +55,22 @@ body {
   line-height: 1.5;
 }
 
+.layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 16px;
+}
+
 .app {
-  max-width: 880px;
+  width: 880px;
   margin: 0 auto;
   padding: 32px 16px 48px;
+}
+
+.layout .app {
+  margin: 0;
 }
 
 .app-header {
@@ -689,6 +701,12 @@ ul#taskList {
 
   .task-item {
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    flex-direction: column;
   }
 }
 

@@ -9,6 +9,15 @@
   const taskList = document.getElementById("taskList");
   const emptyState = document.getElementById("emptyState");
   const completedTasksEl = document.getElementById("completedTasks");
+  const commentPad = document.getElementById("commentPad");
+  const layoutRoot = document.getElementById("layoutRoot");
+  const commentPadContainer = commentPad?.closest(".comment-pad");
+  const notesFeature =
+    window.TasksNotes || {
+      applyVisibility: () => {},
+      bindPersistence: () => {},
+      loadInto: () => {},
+    };
 
   const state = {
     tasks: [],
@@ -19,6 +28,7 @@
   const settings = {
     darkMode: false,
     partyMode: false,
+    notesEnabled: true,
     language: "en",
   };
 
@@ -136,6 +146,8 @@
       if (parsed && typeof parsed === "object") {
         settings.darkMode = Boolean(parsed.darkMode);
         settings.partyMode = Boolean(parsed.partyMode);
+        settings.notesEnabled =
+          parsed.notesEnabled === undefined ? true : Boolean(parsed.notesEnabled);
         if (
           parsed.language &&
           window.i18n?.translations &&
@@ -462,7 +474,13 @@
   loadSettings();
   syncLanguage();
   applyTheme();
+  notesFeature.applyVisibility(
+    { layoutRoot, container: commentPadContainer },
+    settings.notesEnabled
+  );
   loadTasks();
+  notesFeature.loadInto(commentPad);
+  notesFeature.bindPersistence(commentPad);
   bindEvents();
   render();
 })();
